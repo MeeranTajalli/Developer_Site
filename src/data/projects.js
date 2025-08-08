@@ -1,0 +1,60 @@
+const GH = (name) => `https://github.com/MeeranTajalli/${name}`;
+
+export default [
+  {
+    slug: "reactjs-test",
+    name: "Crypto Prices — Live WebSocket Dashboard",
+    desc: "React app that subscribes to a WebSocket feed and updates a live 'Popular Cryptocurrencies' table every few seconds. Built UI/UX and real-time state updates.",
+    tags: ["React", "WebSocket", "Bootstrap"],
+    featured: true,
+    links: [{ label: "Code", href: GH("Reactjs-Test") }],
+  },
+  {
+    slug: "react-bank-app",
+    name: "React Bank App (Tailwind UI)",
+    desc: "Front-end bank UI built with React + Tailwind. Focus on responsive layout, component composition, and polished micro-interactions.",
+    tags: ["React", "TailwindCSS"],
+    featured: true,
+    links: [{ label: "Code", href: GH("React_Bank_App") }],
+  },
+  {
+    slug: "memories-vault",
+    name: "Memories Vault — Azure Blob Storage + CI/CD",
+    desc: "Secure photo storage web app with public/private containers on Azure Blob Storage, GitHub-based CI/CD, and basic auth gating for private media.",
+    tags: ["Azure", "CI/CD", "Auth", "Storage"],
+    featured: true,
+    links: [{ label: "Code", href: GH("memories-vault") }],
+  },
+  {
+    slug: "login-revamp-bxlend",
+    name: "BxLend — Login Revamp",
+    desc: "Production login page redesigned to a new spec. Focus on responsive layout, form validation states, and accessibility.",
+    tags: ["HTML", "CSS", "Accessibility"],
+    featured: false,
+    links: [{ label: "Code", href: GH("login-revamp-Bxlend") }],
+  },
+  {
+    slug: "bxlend-landing",
+    name: "BxLend Landing Page",
+    desc: "Responsive landing page work for a crypto exchange. Marketing-grade sections, layout, and typography.",
+    tags: ["HTML", "CSS"],
+    featured: false,
+    links: [{ label: "Code", href: GH("BxLend_LandingPage") }],
+  },
+  {
+    slug: "crypto-backend-websocket",
+    name: "Crypto WebSocket Backend",
+    desc: "Node.js WebSocket backend that streams real-time crypto prices, used by the React dashboard.",
+    tags: ["Node.js", "WebSocket", "Backend"],
+    featured: false,
+    links: [{ label: "Code", href: GH("crypto_backend_websocket") }],
+  },
+  {
+    slug: "a-star-image-puzzle",
+    name: "8-Puzzle (A* with Image Tiles)",
+    desc: "A* search solver with an interface that reassembles user-uploaded images tile by tile. Demonstrates algorithms + UX.",
+    tags: ["Python", "A*", "Algorithms", "UI"],
+    featured: false,
+    links: [{ label: "Code", href: GH("8-Puzzle-But-Now-With-Images") }],
+  },
+];
