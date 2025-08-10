@@ -10,12 +10,13 @@ export default [
     links: [{ label: "Code", href: GH("Reactjs-Test") }],
   },
   {
-    slug: "react-bank-app",
+    slug: "HooBank Landing Page",
     name: "React Bank App (Tailwind UI)",
     desc: "Front-end bank UI built with React + Tailwind. Focus on responsive layout, component composition, and polished micro-interactions.",
     tags: ["React", "TailwindCSS"],
     featured: true,
     links: [{ label: "Code", href: GH("React_Bank_App") }],
+    previewUrl: "https://hoobank-landing-page-gules.vercel.app/",
   },
   {
     slug: "memories-vault",
@@ -40,7 +41,7 @@ export default [
     tags: ["HTML", "CSS", "Web Socket"],
     featured: false,
     links: [{ label: "Code", href: GH("BxLend_LandingPage") }],
-    previewUrl: "https://github.com/MeeranTajalli/React_Bank_App",
+    previewUrl: "https://developer-site-teal.vercel.app/",
   },
   {
     slug: "crypto-backend-websocket",
