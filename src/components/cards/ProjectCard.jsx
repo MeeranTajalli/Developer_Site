@@ -15,6 +15,16 @@ export default function ProjectCard({ project }) {
           ))}
         </div>
         <div className="flex gap-3">
+          {project.previewUrl && (
+  <a
+    href={project.previewUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-4 inline-block text-sky-300 hover:underline"
+  >
+    Live Preview →
+  </a>
+)}
           {(project.links||[]).map(l => (
             <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-sky-300 hover:underline">
               <ExternalLink className="h-3.5 w-3.5" /> {l.label}

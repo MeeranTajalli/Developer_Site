@@ -37,9 +37,10 @@ export default [
     slug: "bxlend-landing",
     name: "BxLend Landing Page",
     desc: "Responsive landing page work for a crypto exchange. Marketing-grade sections, layout, and typography.",
-    tags: ["HTML", "CSS"],
+    tags: ["HTML", "CSS", "Web Socket"],
     featured: false,
     links: [{ label: "Code", href: GH("BxLend_LandingPage") }],
+    previewUrl: "https://github.com/MeeranTajalli/React_Bank_App",
   },
   {
     slug: "crypto-backend-websocket",
