@@ -12,7 +12,7 @@ import EXTRAS from '@/data/extras'
 import { Briefcase, Code2, GraduationCap, Award, Sparkles } from 'lucide-react'
 
 export default function Home() {
-  const featured = PROJECTS.filter(p => p.featured).slice(0, 3);
+  const featured = PROJECTS.filter(p => p.featured).slice(0, 4);
   return (
     <>
       <Hero />

@@ -39,7 +39,7 @@ export default [
     name: "BxLend Landing Page",
     desc: "Responsive landing page work for a crypto exchange. Marketing-grade sections, layout, and typography.",
     tags: ["HTML", "CSS", "Web Socket"],
-    featured: false,
+    featured: true,
     links: [{ label: "Code", href: GH("BxLend_LandingPage") }],
     previewUrl: "https://developer-site-teal.vercel.app/",
   },
@@ -56,7 +56,7 @@ export default [
     name: "8-Puzzle (A* with Image Tiles)",
     desc: "A* search solver with an interface that reassembles user-uploaded images tile by tile. Demonstrates algorithms + UX.",
     tags: ["Python", "A*", "Algorithms", "UI"],
-    featured: false,
+    featured: true,
     links: [{ label: "Code", href: GH("8-Puzzle-But-Now-With-Images") }],
   },
 ];
