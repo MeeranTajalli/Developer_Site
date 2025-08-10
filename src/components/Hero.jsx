@@ -45,22 +45,23 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Column - Image */}
-      <div className="relative h-64 w-full md:h-80">
-        {/* Decorative backgrounds */}
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-sky-500/20 via-indigo-500/20 to-cyan-400/20" />
-        <div className="absolute inset-0 rounded-3xl border border-slate-800/70" />
-        <div className="absolute inset-0 rounded-3xl [mask-image:radial-gradient(white,transparent_60%)]" />
+{/* Right Column - Image */}
+<div className="relative mx-auto h-80 w-64 md:h-[28rem] md:w-80 overflow-hidden rounded-3xl">
+  {/* Gradient background */}
+  <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/20 via-indigo-500/20 to-cyan-400/20" />
+  <div className="absolute inset-0 border border-slate-800/70 rounded-3xl" />
+  <div className="absolute inset-0 [mask-image:radial-gradient(white,transparent_65%)]" />
 
-        {/* Profile Image */}
-        <div className="absolute inset-0 flex items-center justify-center">
+  {/* Your image */}
   <img
     src="/Profile.png"
     alt="Profile"
-    className="w-full h-full rounded-3xl object-cover"
+    className="absolute inset-0 h-full w-full object-cover object-top rounded-3xl"
   />
-        </div>
-      </div>
+</div>
+
+
+
     </section>
   );
 }
