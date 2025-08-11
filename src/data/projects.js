@@ -41,7 +41,7 @@ export default [
     tags: ["HTML", "CSS", "Web Socket"],
     featured: true,
     links: [{ label: "Code", href: GH("BxLend_LandingPage") }],
-    previewUrl: "https://developer-site-teal.vercel.app/",
+    previewUrl: "https://bx-lend-landing-page.vercel.app/",
   },
   {
     slug: "crypto-backend-websocket",
