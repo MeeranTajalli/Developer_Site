@@ -187,7 +187,11 @@ export default function Navbar() {
             <Linkedin size={16} />
             <Label>LinkedIn</Label>
           </ActionButton>
-          <ResumeButton href={PROFILE.links.resumeUrl}>
+          <ResumeButton
+            href={PROFILE.links.resumeUrl}
+            target="_blank"
+            rel="noopener"
+          >
             <Download size={14} />
             Resume
           </ResumeButton>
