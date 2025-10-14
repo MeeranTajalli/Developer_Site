@@ -63,6 +63,10 @@ const Actions = styled.div`
   gap: 0.5rem;
 `;
 
+const ThemeToggle = styled.div`
+  margin-left: 0.75rem;
+`;
+
 const baseInteractive = `
   display: inline-flex;
   align-items: center;
@@ -175,13 +179,6 @@ export default function Navbar() {
           <NavLink href="/projects">All Projects</NavLink>
         </DesktopNav>
         <Actions>
-          <ToggleButton
-            onClick={theme.toggleTheme}
-            aria-label="Toggle theme"
-            aria-pressed={theme.name === "light"}
-          >
-            {isLight ? <Moon size={16} /> : <Sun size={16} />}
-          </ToggleButton>
           <ActionButton href={PROFILE.links.github} target="_blank" rel="noreferrer">
             <Github size={16} />
             <Label>GitHub</Label>
@@ -194,6 +191,15 @@ export default function Navbar() {
             <Download size={14} />
             Resume
           </ResumeButton>
+          <ThemeToggle>
+            <ToggleButton
+              onClick={theme.toggleTheme}
+              aria-label="Toggle theme"
+              aria-pressed={theme.name === "light"}
+            >
+              {isLight ? <Moon size={16} /> : <Sun size={16} />}
+            </ToggleButton>
+          </ThemeToggle>
         </Actions>
       </Inner>
     </Wrapper>
