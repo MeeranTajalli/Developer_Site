@@ -1,60 +1,122 @@
-import { ExternalLink, Code2, Monitor } from 'lucide-react';
+import { motion } from "framer-motion";
+import styled from "styled-components";
+import { ExternalLink, Code2, Monitor } from "lucide-react";
 
-export default function ProjectCard({ project }) {
+const CardContainer = styled(motion.div)`
+  border-radius: 1rem;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.surface};
+  backdrop-filter: blur(10px);
+  transition: border-color 250ms ease, background 250ms ease;
+`;
+
+const CardHeader = styled.div`
+  padding: 1.25rem;
+  border-bottom: 1px solid ${({ theme }) => theme.borderSubtle};
+  transition: border-color 250ms ease;
+`;
+
+const CardTitle = styled.h3`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.textPrimary};
+  font-size: 1rem;
+  transition: color 250ms ease;
+`;
+
+const CardBody = styled.div`
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Description = styled.p`
+  font-size: 0.9375rem;
+  color: ${({ theme }) => theme.textSecondary};
+  line-height: 1.6;
+  transition: color 250ms ease;
+`;
+
+const TagList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+
+const Tag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid ${({ theme }) => theme.tagBorder};
+  background: ${({ theme }) => theme.tagBg};
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  transition: border-color 250ms ease, background 250ms ease;
+`;
+
+const Links = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+`;
+
+const LinkAnchor = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.linkAccent};
+  white-space: nowrap;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.linkAccentHover};
+  }
+`;
+
+export default function ProjectCard({ project, index = 0 }) {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/60 transition-transform hover:-translate-y-1">
-      {/* Header */}
-      <div className="p-5 border-b border-slate-800/60">
-        <h3 className="flex items-center gap-2 text-slate-100 font-semibold">
-          <Code2 className="h-4 w-4" /> {project.name}
-        </h3>
-      </div>
-
-      {/* Body */}
-      <div className="p-5 space-y-4">
-        <p className="text-sm text-slate-300">{project.desc}</p>
-
-        {/* Tags */}
-        {project.tags?.length > 0 && (
-          <div className="flex gap-2 flex-wrap">
-            {project.tags.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-0.5 text-xs"
-              >
-                {t}
-              </span>
+    <CardContainer
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: Math.min(index * 0.05, 0.3) }}
+      whileHover={{ y: -6, scale: 1.01, transition: { type: "spring", stiffness: 220, damping: 18 } }}
+    >
+      <CardHeader>
+        <CardTitle>
+          <Code2 size={16} />
+          {project.name}
+        </CardTitle>
+      </CardHeader>
+      <CardBody>
+        <Description>{project.desc}</Description>
+        {project.tags?.length ? (
+          <TagList>
+            {project.tags.map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
             ))}
-          </div>
-        )}
-
-        {/* Links */}
-        <div className="flex flex-wrap gap-3 pt-2">
-          {project.previewUrl && (
-            <a
-              href={project.previewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-sky-300 hover:underline whitespace-nowrap"
-            >
-              <Monitor className="h-3.5 w-3.5" />
+          </TagList>
+        ) : null}
+        <Links>
+          {project.previewUrl ? (
+            <LinkAnchor href={project.previewUrl} target="_blank" rel="noopener noreferrer">
+              <Monitor size={14} />
               Live Preview
-            </a>
-          )}
-          {(project.links || []).map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-sky-300 hover:underline whitespace-nowrap"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              {l.label}
-            </a>
+            </LinkAnchor>
+          ) : null}
+          {(project.links || []).map((link) => (
+            <LinkAnchor key={link.href} href={link.href} target="_blank" rel="noreferrer">
+              <ExternalLink size={14} />
+              {link.label}
+            </LinkAnchor>
           ))}
-        </div>
-      </div>
-    </div>
+        </Links>
+      </CardBody>
+    </CardContainer>
   );
 }

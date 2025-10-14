@@ -1,13 +1,26 @@
-import React from 'react'
-export function Card({ className = '', children }) {
-  return <div className={`rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur ${className}`}>{children}</div>
-}
-export function CardHeader({ children, className = '' }) {
-  return <div className={`p-5 border-b border-slate-800/60 ${className}`}>{children}</div>
-}
-export function CardTitle({ children, className = '' }) {
-  return <h3 className={`text-lg font-semibold ${className}`}>{children}</h3>
-}
-export function CardContent({ children, className = '' }) {
-  return <div className={`p-5 ${className}`}>{children}</div>
-}
+import styled from "styled-components";
+
+export const Card = styled.div`
+  border-radius: 1rem;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.surface};
+  backdrop-filter: blur(8px);
+  transition: border-color 250ms ease, background 250ms ease;
+`;
+
+export const CardHeader = styled.div`
+  padding: 1.25rem;
+  border-bottom: 1px solid ${({ theme }) => theme.borderSubtle};
+  transition: border-color 250ms ease;
+`;
+
+export const CardTitle = styled.h3`
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.textPrimary};
+  transition: color 250ms ease;
+`;
+
+export const CardContent = styled.div`
+  padding: 1.25rem;
+`;

@@ -1,96 +1,201 @@
-import Hero from '@/components/Hero'
-import Section from '@/components/Section'
-import ExperienceList from '@/components/lists/ExperienceList'
-import ProjectCard from '@/components/cards/ProjectCard'
-import EXPERIENCE from '@/data/experience'
-import PROJECTS from '@/data/projects'
-import EDUCATION from '@/data/education'
-import SKILLS from '@/data/skills'
-import EXTRAS from '@/data/extras'
+import styled from "styled-components";
+import Hero from "@/components/Hero";
+import Section from "@/components/Section";
+import ExperienceList from "@/components/lists/ExperienceList";
+import ProjectCard from "@/components/cards/ProjectCard";
+import EXPERIENCE from "@/data/experience";
+import PROJECTS from "@/data/projects";
+import EDUCATION from "@/data/education";
+import SKILLS from "@/data/skills";
+import EXTRAS from "@/data/extras";
+import { Briefcase, Code2, GraduationCap, Award, Sparkles } from "lucide-react";
 
-// 👇 add these
-import { Briefcase, Code2, GraduationCap, Award, Sparkles } from 'lucide-react'
+const ProjectsGrid = styled.div`
+  display: grid;
+  gap: 1.5rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+`;
+
+const MoreProjectsLink = styled.a`
+  margin-top: 1.5rem;
+  display: inline-block;
+  color: ${({ theme }) => theme.linkAccent};
+  font-size: 0.9375rem;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.linkAccentHover};
+    text-decoration: underline;
+  }
+`;
+
+const EducationList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const EducationItem = styled.div`
+  font-size: 0.875rem;
+`;
+
+const EducationSchool = styled.div`
+  color: ${({ theme }) => theme.textPrimary};
+  font-weight: 500;
+  transition: color 250ms ease;
+`;
+
+const EducationDegree = styled.div`
+  color: ${({ theme }) => theme.textMuted};
+  transition: color 250ms ease;
+`;
+
+const EducationPeriod = styled.div`
+  color: ${({ theme }) => theme.textExtraMuted};
+  font-size: 0.75rem;
+  transition: color 250ms ease;
+`;
+
+const SkillsGrid = styled.div`
+  display: grid;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+`;
+
+const SkillCategory = styled.div``;
+
+const SkillHeading = styled.h4`
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: ${({ theme }) => theme.textMuted};
+  transition: color 250ms ease;
+`;
+
+const SkillTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+
+const SkillTag = styled.span`
+  border-radius: 9999px;
+  border: 1px solid ${({ theme }) => theme.tagBorder};
+  background: ${({ theme }) => theme.tagBg};
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  transition: border-color 250ms ease, background 250ms ease;
+`;
+
+const ExtrasGrid = styled.div`
+  display: grid;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+`;
+
+const ExtraCard = styled.div`
+  border-radius: 1rem;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.surface};
+  padding: 1.25rem;
+  transition: border-color 250ms ease, background 250ms ease;
+`;
+
+const ExtraTitle = styled.div`
+  font-weight: 600;
+  color: ${({ theme }) => theme.textPrimary};
+  margin-bottom: 0.5rem;
+  transition: color 250ms ease;
+`;
+
+const ExtraList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.textSecondary};
+  transition: color 250ms ease;
+`;
 
 export default function Home() {
-  const featured = PROJECTS.filter(p => p.featured).slice(0, 4);
+  const featured = PROJECTS.filter((project) => project.featured).slice(0, 4);
+
   return (
     <>
       <Hero />
 
-      <Section
-        id="experience"
-        title="Experience"
-        icon={<Briefcase className="h-5 w-5" />}
-      >
+      <Section id="experience" title="Experience" icon={<Briefcase size={20} />}>
         <ExperienceList jobs={EXPERIENCE} />
       </Section>
 
-      <Section
-        id="projects"
-        title="Projects"
-        icon={<Code2 className="h-5 w-5" />}
-      >
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map(p => <ProjectCard key={p.slug} project={p} />)}
-        </div>
-        <a href="/projects" className="mt-6 inline-block text-sky-300 hover:underline">
-          View all projects →
-        </a>
-      </Section>
-
-      <Section
-        id="education"
-        title="Education"
-        icon={<GraduationCap className="h-5 w-5" />}
-      >
-        <div className="space-y-4">
-          {EDUCATION.map(e => (
-            <div key={e.school} className="text-sm">
-              <div className="text-slate-200 font-medium">{e.school}</div>
-              <div className="text-slate-400">{e.degree}</div>
-              <div className="text-slate-500 text-xs">{e.period}</div>
-            </div>
+      <Section id="projects" title="Projects" icon={<Code2 size={20} />}>
+        <ProjectsGrid>
+          {featured.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} />
           ))}
-        </div>
+        </ProjectsGrid>
+        <MoreProjectsLink href="/projects">View all projects</MoreProjectsLink>
       </Section>
 
-      <Section
-        id="skills"
-        title="Skills"
-        icon={<Award className="h-5 w-5" />}
-      >
-        <div className="grid gap-6 md:grid-cols-2">
-          {Object.entries(SKILLS).map(([k, items]) => (
-            <div key={k}>
-              <h4 className="mb-3 text-sm uppercase tracking-wider text-slate-400">{k}</h4>
-              <div className="flex flex-wrap gap-2">
-                {items.map(s => (
-                  <span key={s} className="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1 text-xs">
-                    {s}
-                  </span>
+      <Section id="education" title="Education" icon={<GraduationCap size={20} />}>
+        <EducationList>
+          {EDUCATION.map((item) => (
+            <EducationItem key={item.school}>
+              <EducationSchool>{item.school}</EducationSchool>
+              <EducationDegree>{item.degree}</EducationDegree>
+              <EducationPeriod>{item.period}</EducationPeriod>
+            </EducationItem>
+          ))}
+        </EducationList>
+      </Section>
+
+      <Section id="skills" title="Skills" icon={<Award size={20} />}>
+        <SkillsGrid>
+          {Object.entries(SKILLS).map(([category, items]) => (
+            <SkillCategory key={category}>
+              <SkillHeading>{category}</SkillHeading>
+              <SkillTags>
+                {items.map((skill) => (
+                  <SkillTag key={skill}>{skill}</SkillTag>
                 ))}
-              </div>
-            </div>
+              </SkillTags>
+            </SkillCategory>
           ))}
-        </div>
+        </SkillsGrid>
       </Section>
 
-      <Section
-        id="extras"
-        title="Extra-Curriculars"
-        icon={<Sparkles className="h-5 w-5" />}
-      >
-        <div className="grid gap-6 md:grid-cols-2">
-          {EXTRAS.map(x => (
-            <div key={x.title} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-              <div className="text-slate-100 font-semibold mb-2">{x.title}</div>
-              <ul className="list-disc pl-5 text-sm text-slate-300 space-y-2">
-                {x.points.map((p,i) => <li key={i}>{p}</li>)}
-              </ul>
-            </div>
+      <Section id="extras" title="Extra-Curriculars" icon={<Sparkles size={20} />}>
+        <ExtrasGrid>
+          {EXTRAS.map((extra) => (
+            <ExtraCard key={extra.title}>
+              <ExtraTitle>{extra.title}</ExtraTitle>
+              <ExtraList>
+                {extra.points.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ExtraList>
+            </ExtraCard>
           ))}
-        </div>
+        </ExtrasGrid>
       </Section>
     </>
-  )
+  );
 }

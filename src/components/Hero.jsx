@@ -1,67 +1,198 @@
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
-import { Button } from '@/ui/button';
-import PROFILE from '@/data/profile';
+import { motion } from "framer-motion";
+import styled, { keyframes } from "styled-components";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { Button } from "@/ui/button";
+import PROFILE from "@/data/profile";
+
+const float = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+`;
+
+const HeroSection = styled(motion.section)`
+  position: relative;
+  margin: 0 auto;
+  max-width: 72rem;
+  display: grid;
+  gap: 2.5rem;
+  padding: 4rem 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 6rem 0;
+  }
+`;
+
+const CopyColumn = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const Title = styled.h1`
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: ${({ theme }) => theme.textPrimary};
+  transition: color 250ms ease;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+`;
+
+const Highlight = styled.span`
+  background: ${({ theme }) => theme.highlightGradient};
+  -webkit-background-clip: text;
+  color: transparent;
+`;
+
+const Description = styled.p`
+  max-width: 40rem;
+  color: ${({ theme }) => theme.textSecondary};
+  font-size: 1rem;
+  line-height: 1.6;
+  transition: color 250ms ease;
+`;
+
+const Actions = styled(motion.div)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+`;
+
+const InfoRow = styled(motion.div)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.textMuted};
+  transition: color 250ms ease;
+`;
+
+const InfoItem = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const Showcase = styled(motion.div)`
+  position: relative;
+  margin: 0 auto;
+  width: 16rem;
+  height: 20rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  animation: ${float} 8s ease-in-out infinite;
+
+  @media (min-width: 768px) {
+    width: 20rem;
+    height: 28rem;
+  }
+`;
+
+const Gradient = styled.div`
+  position: absolute;
+  inset: 0;
+  background: ${({ theme }) => theme.heroImageGradient};
+`;
+
+const Border = styled.div`
+  position: absolute;
+  inset: 0;
+  border: 1px solid ${({ theme }) => theme.showcaseBorder};
+  border-radius: 1.5rem;
+  transition: border-color 250ms ease;
+`;
+
+const Mask = styled.div`
+  position: absolute;
+  inset: 0;
+  mask-image: radial-gradient(circle, white 65%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, white 65%, transparent 100%);
+`;
+
+const ProfileImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 1.5rem;
+`;
+
+const LinkContent = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+const copyVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delayChildren: 0.1, staggerChildren: 0.08 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export default function Hero() {
   return (
-    <section
-      id="home"
-      className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 py-16 md:grid-cols-2 md:py-24"
-    >
-      {/* Left Column - Text */}
-      <div className="space-y-6">
-        <h1 className="text-3xl font-semibold leading-tight md:text-5xl">
-          Building smooth, fast,{' '}
-          <span className="bg-gradient-to-r from-sky-300 to-indigo-300 bg-clip-text text-transparent">
-            developer experiences
-          </span>
-        </h1>
-        <p className="max-w-xl text-slate-300">{PROFILE.blurb}</p>
-        <div className="flex flex-wrap gap-3">
-          <Button asChild className="h-11 rounded-xl">
-            <a href="#projects" className="inline-flex items-center gap-2">
-              Explore Projects <ArrowRight className="h-4 w-4" />
+    <HeroSection id="home" variants={sectionVariants} initial="hidden" animate="visible">
+      <CopyColumn variants={copyVariants}>
+        <motion.div variants={itemVariants}>
+          <Title>
+            Building smooth, fast, <Highlight>developer experiences</Highlight>
+          </Title>
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <Description>{PROFILE.blurb}</Description>
+        </motion.div>
+        <Actions variants={itemVariants}>
+          <Button asChild>
+            <a href="#projects">
+              <LinkContent>
+                Explore Projects <ArrowRight size={16} />
+              </LinkContent>
             </a>
           </Button>
-          <Button
-            asChild
-            variant="secondary"
-            className="h-11 rounded-xl border border-slate-700 bg-slate-900/60"
-          >
-            <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center gap-2">
-              Contact Me <Mail className="h-4 w-4" />
+          <Button asChild variant="secondary">
+            <a href={`mailto:${PROFILE.email}`}>
+              <LinkContent>
+                Contact Me <Mail size={16} />
+              </LinkContent>
             </a>
           </Button>
-        </div>
-        <div className="flex gap-4 text-sm text-slate-300">
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="h-4 w-4" />
+        </Actions>
+        <InfoRow variants={itemVariants}>
+          <InfoItem>
+            <MapPin size={16} />
             {PROFILE.location}
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <Phone className="h-4 w-4" />
+          </InfoItem>
+          <InfoItem>
+            <Phone size={16} />
             {PROFILE.phone}
-          </span>
-        </div>
-      </div>
+          </InfoItem>
+        </InfoRow>
+      </CopyColumn>
 
-{/* Right Column - Image */}
-<div className="relative mx-auto h-80 w-64 md:h-[28rem] md:w-80 overflow-hidden rounded-3xl">
-  {/* Gradient background */}
-  <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/20 via-indigo-500/20 to-cyan-400/20" />
-  <div className="absolute inset-0 border border-slate-800/70 rounded-3xl" />
-  <div className="absolute inset-0 [mask-image:radial-gradient(white,transparent_65%)]" />
-
-  {/* Your image */}
-  <img
-    src="/Profile.png"
-    alt="Profile"
-    className="absolute inset-0 h-full w-full object-cover object-top rounded-3xl"
-  />
-</div>
-
-
-
-    </section>
+      <Showcase
+        variants={itemVariants}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      >
+        <Gradient />
+        <Border />
+        <Mask />
+        <ProfileImage src="/Profile.png" alt="Profile" />
+      </Showcase>
+    </HeroSection>
   );
 }
