@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const TimelineWrapper = styled.div`
@@ -29,7 +30,7 @@ const TimelineWrapper = styled.div`
   }
 `;
 
-const TimelineItem = styled.div`
+const TimelineItem = styled(motion.div)`
   position: relative;
   display: flex;
   width: 100%;
@@ -139,7 +140,18 @@ export default function ExperienceList({ jobs }) {
       {jobs.map((job, index) => {
         const side = index % 2 === 0 ? "left" : "right";
         return (
-          <TimelineItem key={job.role} side={side}>
+          <TimelineItem
+            key={job.role}
+            side={side}
+            initial={{ opacity: 0, y: side === "left" ? 36 : 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+              delay: Math.min(index * 0.08, 0.3),
+            }}
+          >
             <Indicator />
             <TimelineContent>
               <ExperienceHeader>

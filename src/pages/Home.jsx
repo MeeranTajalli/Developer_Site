@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
@@ -45,7 +46,7 @@ const EducationList = styled.div`
   }
 `;
 
-const EducationItem = styled.a`
+const EducationItem = styled(motion.a)`
   position: relative;
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.border};
@@ -115,7 +116,7 @@ const SkillsGrid = styled.div`
   }
 `;
 
-const SkillCategory = styled.div`
+const SkillCategory = styled(motion.div)`
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.surfaceMuted};
@@ -175,7 +176,7 @@ const ExtrasGrid = styled.div`
   }
 `;
 
-const ExtraCard = styled.div`
+const ExtraCard = styled(motion.div)`
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.surface};
@@ -232,6 +233,10 @@ export default function Home() {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={`${item.school} website`}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
             >
               <EducationSchool>{item.school}</EducationSchool>
               <EducationDegree>{item.degree}</EducationDegree>
@@ -243,8 +248,14 @@ export default function Home() {
 
       <Section id="skills" title="Skills" icon={<Award size={20} />}>
         <SkillsGrid>
-          {Object.entries(SKILLS).map(([category, items]) => (
-            <SkillCategory key={category}>
+          {Object.entries(SKILLS).map(([category, items], index) => (
+            <SkillCategory
+              key={category}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: Math.min(index * 0.05, 0.2) }}
+            >
               <SkillHeading>{category}</SkillHeading>
               <SkillTags>
                 {items.map((skill) => (
@@ -258,8 +269,14 @@ export default function Home() {
 
       <Section id="extras" title="Extra-Curriculars" icon={<Sparkles size={20} />}>
         <ExtrasGrid>
-          {EXTRAS.map((extra) => (
-            <ExtraCard key={extra.title}>
+          {EXTRAS.map((extra, index) => (
+            <ExtraCard
+              key={extra.title}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.55, ease: "easeOut", delay: Math.min(index * 0.05, 0.2) }}
+            >
               <ExtraTitle>{extra.title}</ExtraTitle>
               <ExtraList>
                 {extra.points.map((point, index) => (
