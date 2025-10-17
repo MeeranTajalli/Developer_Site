@@ -24,6 +24,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.textPrimary};
     -webkit-font-smoothing: antialiased;
     transition: background-color 250ms ease, color 250ms ease;
+    cursor: default;
   }
 
   a {
@@ -45,6 +46,19 @@ const GlobalStyles = createGlobalStyle`
   input,
   textarea {
     font-family: inherit;
+  }
+
+  a[href],
+  button,
+  [role="button"],
+  .interactive {
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
   }
 
   ::selection {

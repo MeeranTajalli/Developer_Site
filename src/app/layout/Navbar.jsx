@@ -49,11 +49,46 @@ const DesktopNav = styled.nav`
 `;
 
 const NavLink = styled.a`
+  position: relative;
   color: inherit;
-  transition: color 150ms ease;
+  padding-bottom: 0.2rem;
+  transition: color 220ms ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: ${({ theme }) => theme.accent};
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition:
+      transform 260ms ease,
+      opacity 260ms ease;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.navLinkHover};
+
+    &::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      transition: opacity 150ms ease;
+    }
+
+    &:hover::after {
+      transform: none;
+      opacity: 1;
+    }
   }
 `;
 

@@ -28,8 +28,9 @@ export default [
     company: "Walzix Digitals — Karachi, Pakistan",
     period: "Jun 2020 — Aug 2020",
     points: [
-      "Built a responsive e-commerce site in React; improved conversions.",
-      "Developed interactive components with Hooks/Redux; ran usability tests.",
+      "Built Websites for clients using CMS Wordpress",
+      "Worked on customization across retainer clients focusing on theme restructuring or inventory management",
+      "Started hands on development using the base HTML, CSS, and Javascript to start my Web Development Journey"
     ],
   },
 ];

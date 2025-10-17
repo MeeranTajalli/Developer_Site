@@ -11,7 +11,12 @@ const StyledButton = styled.button`
   font-size: 0.875rem;
   font-weight: 500;
   border: 1px solid transparent;
-  transition: background 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
   cursor: pointer;
 
   &:focus-visible {
@@ -27,23 +32,25 @@ const StyledButton = styled.button`
   ${({ variant, theme }) => {
     if (variant === "secondary") {
       return css`
-        background: ${theme.buttonSecondaryBg};
+        background-color: ${theme.buttonSecondaryBg};
         color: ${theme.buttonSecondaryText};
         border-color: ${theme.buttonSecondaryBorder};
 
         &:hover {
-          background: ${theme.buttonSecondaryHover};
-          color: ${theme.textPrimary};
+          background-color: ${theme.buttonSecondaryText};
+          color: ${theme.buttonSecondaryBg};
+          border-color: ${theme.buttonSecondaryText};
         }
       `;
     }
 
     return css`
-      background: ${theme.buttonPrimaryBg};
+      background-color: ${theme.buttonPrimaryBg};
       color: ${theme.buttonPrimaryText};
 
       &:hover {
-        background: ${theme.buttonPrimaryHover};
+        background-color: ${theme.buttonPrimaryHover};
+        color: ${theme.buttonPrimaryText};
       }
     `;
   }}

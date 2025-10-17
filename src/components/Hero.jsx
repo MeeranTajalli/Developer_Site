@@ -10,6 +10,25 @@ const float = keyframes`
   100% { transform: translateY(0px); }
 `;
 
+const pulseGlow = keyframes`
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--pulse-color);
+  }
+  50% {
+    box-shadow: 0 0 28px 0 var(--pulse-glow);
+  }
+`;
+
+const haloPulse = keyframes`
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.2);
+  }
+`;
+
 const HeroSection = styled(motion.section)`
   position: relative;
   margin: 0 auto;
@@ -62,6 +81,48 @@ const Actions = styled(motion.div)`
   gap: 0.75rem;
 `;
 
+const ExploreCTA = styled(Button)`
+  position: relative;
+  isolation: isolate;
+  --pulse-color: ${({ theme }) => `${theme.accent}33`};
+  --pulse-glow: ${({ theme }) => `${theme.accentStrong ?? theme.accent}66`};
+  animation: ${pulseGlow} 2.8s ease-in-out infinite;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    opacity: 0;
+    background: radial-gradient(circle, var(--pulse-glow), transparent 70%);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: -1;
+    animation: ${haloPulse} 2.8s ease-in-out infinite;
+  }
+
+  &:hover {
+    animation-play-state: paused;
+    transform: translateY(-1px);
+    box-shadow: 0 18px 30px -12px ${({ theme }) => theme.accentStrong ?? theme.accent};
+
+    &::after {
+      animation-play-state: paused;
+      opacity: 0.6;
+      transform: scale(1.35);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+
+    &::after {
+      display: none;
+    }
+  }
+`;
+
 const InfoRow = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
@@ -92,26 +153,6 @@ const Showcase = styled(motion.div)`
   }
 `;
 
-const Gradient = styled.div`
-  position: absolute;
-  inset: 0;
-  background: ${({ theme }) => theme.heroImageGradient};
-`;
-
-const Border = styled.div`
-  position: absolute;
-  inset: 0;
-  border: 1px solid ${({ theme }) => theme.showcaseBorder};
-  border-radius: 1.5rem;
-  transition: border-color 250ms ease;
-`;
-
-const Mask = styled.div`
-  position: absolute;
-  inset: 0;
-  mask-image: radial-gradient(circle, white 65%, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle, white 65%, transparent 100%);
-`;
 
 const ProfileImage = styled.img`
   position: absolute;
@@ -157,13 +198,13 @@ export default function Hero() {
           <Description>{PROFILE.blurb}</Description>
         </motion.div>
         <Actions variants={itemVariants}>
-          <Button asChild>
+          <ExploreCTA asChild>
             <a href="#projects">
               <LinkContent>
                 Explore Projects <ArrowRight size={16} />
               </LinkContent>
             </a>
-          </Button>
+          </ExploreCTA>
           <Button asChild variant="secondary">
             <a href={`mailto:${PROFILE.email}`}>
               <LinkContent>
@@ -188,9 +229,6 @@ export default function Hero() {
         variants={itemVariants}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
       >
-        <Gradient />
-        <Border />
-        <Mask />
         <ProfileImage src="/Profile.png" alt="Profile" />
       </Showcase>
     </HeroSection>

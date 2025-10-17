@@ -5,7 +5,7 @@ import { ExternalLink, Code2, Monitor } from "lucide-react";
 const CardContainer = styled(motion.div)`
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.border};
-  background: ${({ theme }) => theme.surface};
+  background: ${({ theme }) => theme.surfaceMuted};
   backdrop-filter: blur(10px);
   transition: border-color 250ms ease, background 250ms ease;
 `;

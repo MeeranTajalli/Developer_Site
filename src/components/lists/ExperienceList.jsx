@@ -13,7 +13,7 @@ const TimelineWrapper = styled.div`
     top: 0;
     bottom: 0;
     left: 50%;
-    width: 2px;
+    width: 4px;
     background: ${({ theme }) => theme.borderSubtle};
     transform: translateX(-50%);
     transition: background 250ms ease;
@@ -46,7 +46,7 @@ const TimelineContent = styled.div`
   width: min(100%, 24rem);
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.border};
-  background: ${({ theme }) => theme.surface};
+  background: ${({ theme }) => theme.surfaceAlt};
   overflow: hidden;
   box-shadow: 0 12px 30px -16px rgba(15, 23, 42, 0.5);
   transition: border-color 250ms ease, background 250ms ease, box-shadow 250ms ease;
