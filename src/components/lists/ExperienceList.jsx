@@ -48,11 +48,15 @@ const TimelineContent = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.surfaceAlt};
   overflow: hidden;
-  box-shadow: 0 12px 30px -16px rgba(15, 23, 42, 0.5);
-  transition: border-color 250ms ease, background 250ms ease, box-shadow 250ms ease;
+  box-shadow: 0 16px 36px -24px rgba(15, 23, 42, 0.4);
+  transition:
+    border-color 340ms ease,
+    background 340ms ease,
+    box-shadow 340ms ease,
+    transform 340ms ease;
 
   &:hover {
-    box-shadow: 0 18px 40px -18px rgba(14, 165, 233, 0.35);
+    box-shadow: 0 24px 48px -18px ${({ theme }) => theme.accentStrong ?? theme.accent};
   }
 
   @media (max-width: 768px) {

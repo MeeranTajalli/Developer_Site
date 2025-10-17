@@ -7,7 +7,16 @@ const CardContainer = styled(motion.div)`
   border: 1px solid ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.surfaceMuted};
   backdrop-filter: blur(10px);
-  transition: border-color 250ms ease, background 250ms ease;
+  box-shadow: 0 20px 40px -24px rgba(15, 23, 42, 0.45);
+  transition:
+    border-color 340ms ease,
+    background 340ms ease,
+    box-shadow 340ms ease,
+    transform 340ms ease;
+
+  &:hover {
+    box-shadow: 0 26px 48px -20px ${({ theme }) => theme.accentStrong ?? theme.accent};
+  }
 `;
 
 const CardHeader = styled.div`

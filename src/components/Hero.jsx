@@ -146,6 +146,42 @@ const Showcase = styled(motion.div)`
   overflow: hidden;
   border-radius: 1.5rem;
   animation: ${float} 8s ease-in-out infinite;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -14px;
+    border-radius: 2rem;
+    background: conic-gradient(
+      from 180deg,
+      rgba(56, 189, 248, 0.45),
+      rgba(79, 70, 229, 0.35),
+      rgba(236, 72, 153, 0.35),
+      rgba(56, 189, 248, 0.45)
+    );
+    opacity: 0;
+    filter: blur(18px);
+    transition: opacity 320ms ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 32px 60px -26px rgba(56, 189, 248, 0.45);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: box-shadow 220ms ease;
+
+    &:hover {
+      transform: none;
+    }
+  }
 
   @media (min-width: 768px) {
     width: 20rem;
@@ -162,6 +198,12 @@ const ProfileImage = styled.img`
   object-fit: cover;
   object-position: top;
   border-radius: 1.5rem;
+  transition: transform 320ms cubic-bezier(0.23, 1, 0.32, 1), filter 320ms ease;
+
+  ${Showcase}:hover & {
+    transform: scale(1.04) rotate(-0.8deg);
+    filter: saturate(1.1) brightness(1.03);
+  }
 `;
 
 const LinkContent = styled.span`
